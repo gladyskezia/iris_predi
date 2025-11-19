@@ -1,98 +1,94 @@
-# K-Means Clustering From Scratch (Python Project)
+# K-Nearest Neighbors (KNN) Classification from Scratch
 
-This project implements the K-Means clustering algorithm *from scratch using only NumPy*, and compares the results with Scikit-Learn's built-in KMeans.  
-The Iris dataset is used for clustering and PCA visualization.
+This project implements the K-Nearest Neighbors (KNN) classification algorithm from scratch using only NumPy.  
+The implementation is compared against Scikit-Learn’s KNeighborsClassifier for multiple values of K.  
+A synthetic binary classification dataset is generated using sklearn.datasets.make_classification as required.
 
 ---
 
-## 📌 Features Implemented
+## 1. Dataset Description
 
-### ✔ Custom K-Means implementation
-- Random centroid initialization  
+A synthetic dataset is created with the following parameters:
+
+- 500 samples  
+- 10 numerical features  
+- 5 informative features  
+- 2 classes  
+- Train-test split: 70% training, 30% testing  
+
+This satisfies the project requirement of generating a binary classification dataset.
+
+---
+
+## 2. Custom KNN Implementation
+
+The custom implementation includes:
+
 - Euclidean distance calculation  
-- Cluster assignment  
-- Centroid recomputation  
-- Convergence check using tolerance  
-- Maximum iteration limit  
+- Retrieval of the K nearest neighbors  
+- Majority voting for classification  
+- Predictions for K = 3, 5, and 7  
 
-### ✔ Preprocessing
-- Iris dataset loaded from sklearn.datasets
-- Standardization using StandardScaler
-
-### ✔ Evaluation
-- Silhouette Score computed for:
-  - Custom K-Means implementation  
-  - sklearn.cluster.KMeans
-
-### ✔ Visualization
-- PCA (2-dimensional reduction)
-- Scatter plot colored by cluster assignments
+No external libraries are used for the KNN logic.
 
 ---
 
-## 📁 Project Structure
+## 3. Evaluation Procedure
 
-├── kmeans_from_scratch.py ├── README.md
+The following steps were performed:
 
----
-
-## 🚀 How to Run
-
-```bash
-pip install numpy matplotlib scikit-learn
-python kmeans_from_scratch.py
-
+1. Train the custom KNN model on training data  
+2. Predict on test data  
+3. Compute accuracy for K = 3, 5, and 7  
+4. Repeat the same with Scikit-Learn KNeighborsClassifier  
+5. Compare accuracy values for both implementations  
 
 ---
 
-📊 Output You Will See
+## 4. Results Summary
 
-Custom KMeans silhouette score
-
-Sklearn KMeans silhouette score
-
-PCA scatter plot with cluster coloring
+Accuracy values are printed in the terminal as:
 
 
-Example (values may vary):
+Custom KNN Accuracies:
+K=3: <value>
+K=5: <value>
+K=7: <value>
 
-Custom KMeans Silhouette Score: 0.46
-Sklearn KMeans Silhouette Score: 0.55
+Sklearn KNN Accuracies:
+K=3: <value>
+K=5: <value>
+K=7: <value>
 
 
----
-
-📌 PCA Plot
-
-A 2-D scatter plot is displayed showing the clusters formed by the custom implementation.
-
+The exact values depend on runtime but generally both implementations follow the same trend.
 
 ---
 
-📘 Summary
+## 5. How to Run
 
-This project demonstrates:
-
-Understanding of clustering fundamentals
-
-Ability to implement algorithms without libraries
-
-Comparison with industry-standard implementations
-
-Dimensionality reduction and visual interpretation
+Install required libraries:
 
 
+pip install numpy scikit-learn
+
+
+Run the program:
+
+
+python knn_from_scratch.py
+
+
+This generates all required outputs.
 
 ---
 
-✔ Submission Ready
+## 6. Deliverables Included
 
-This project meets all Cultus/Entri requirements:
+- Python script implementing KNN from scratch  
+- Evaluation of K = 3, 5, 7  
+- Comparison with Scikit-Learn  
+- Synthetic binary dataset generation  
+- Accuracy metrics  
 
-Custom implementation
-
-Evaluation
-
-PCA Visualization
-
-Comparison with sklearn
+All required tasks and deliverables are addressed.
