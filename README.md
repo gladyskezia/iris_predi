@@ -1,121 +1,156 @@
 # Logistic Regression from Scratch (NumPy Implementation)
 
-This project implements a logistic regression classifier using only NumPy.  
-The goal is to demonstrate a full mathematical and programmatic understanding of logistic regression, including data generation, model training, evaluation, and decision boundary visualization.
+This project implements a binary logistic regression classifier using only NumPy.  
+The goal is to demonstrate a clear understanding of the mathematical foundations of logistic regression, including the sigmoid function, binary cross-entropy loss, gradient descent optimization, and manual evaluation metrics.  
+No Scikit-Learn model classes or metric functions were used in the core implementation.
 
 ---
 
-## 1. Dataset Description
+## 1. Dataset Generation
 
-A synthetic two-dimensional binary classification dataset was generated using `make_classification` with the following parameters:
+A synthetic two-dimensional binary classification dataset was generated using `make_classification`.  
+The dataset characteristics are:
 
 - 500 samples  
-- 2 informative numerical features  
+- 2 informative features  
 - No redundant features  
-- Two balanced classes  
-- Random state set for reproducibility  
+- Two class labels (0 and 1)  
+- One cluster per class  
+- A fixed random seed for reproducibility  
 
-The dataset allows clear separation between two classes, making it suitable for logistic regression.
+The dataset is suitable for visualizing the decision boundary in a two-dimensional feature space.
+
+The dataset was divided into training and testing splits using a 70%/30% ratio.
 
 ---
 
 ## 2. Logistic Regression Implementation
 
-The model was implemented without using Scikit-Learn.  
-The following components were built manually:
+The logistic regression model was developed entirely using NumPy.  
+The following components were implemented:
 
-### 2.1 Sigmoid Activation  
-The logistic (sigmoid) function was implemented as  
-*s(z) = 1 / (1 + exp(-z))*.
+### 2.1 Sigmoid Function
+The sigmoid mapping function is defined as:
 
-### 2.2 Binary Cross-Entropy Loss  
-The gradients were derived based on the logistic loss function.
+*s(z) = 1 / (1 + exp(−z))*
 
-### 2.3 Gradient Descent Optimization  
-Weights and bias were updated iteratively across a fixed number of iterations.
+This converts linear model outputs into probabilities between 0 and 1.
 
-### 2.4 Prediction Rule  
-Predicted labels were assigned using a decision threshold of 0.5 on the sigmoid output.
+### 2.2 Model Hypothesis
+Given input features *X*, weights *w*, and bias *b*, the hypothesis is:
+
+*h(x) = sigmoid(w · x + b)*
+
+### 2.3 Loss Function (Binary Cross-Entropy)
+The loss function used during optimization is:
+
+*J(w, b) = −(1/m) Σ [ y log(h) + (1−y) log(1−h) ]*
+
+### 2.4 Gradient Descent
+Gradients for weights and bias were computed using:
+
+*dw = (1/m) Xᵀ(h − y)*  
+*db = (1/m) Σ(h − y)*
+
+Model parameters were updated iteratively for a fixed number of iterations, using a learning rate of 0.1.
+
+### 2.5 Prediction Rule
+Predictions were assigned using a threshold of 0.5:
+
+- If probability ≥ 0.5 → class 1  
+- Otherwise → class 0  
 
 ---
 
-## 3. Training and Model Parameters
+## 3. Evaluation Metrics (Manual NumPy Calculations)
 
-The model was trained using:
+The evaluation did not use Scikit-Learn metrics.  
+Instead, all metrics were computed manually using NumPy.
 
-- Learning rate: 0.1  
-- Iterations: 3000  
-- Input: Training split (70% of dataset)
+### 3.1 Accuracy  
+Accuracy was computed as the proportion of correct predictions.
 
-The final learned parameters are printed in the program output:
+### 3.2 Precision  
+Precision was computed using:
 
-- Final weights  
-- Final bias  
+- True Positives (TP): predicted 1 and actual 1  
+- Predicted Positives (PP): predicted 1  
 
-These values vary slightly depending on system environment but remain consistent in structure.
+*precision = TP / PP*
+
+### 3.3 Recall  
+Recall was computed using:
+
+- Actual Positives (AP): actual value 1  
+
+*recall = TP / AP*
+
+These metrics provide an objective assessment of the model’s classification performance.
 
 ---
 
-## 4. Evaluation Metrics
+## 4. Learned Parameters
 
-The following performance metrics were computed on the test split:
+After gradient descent training, the model outputs the final learned:
 
-- Accuracy  
-- Precision  
-- Recall  
+- Weight vector (length 2)  
+- Bias value  
 
-These provide a quantitative assessment of the classifier’s performance.
+These values are printed when the script is executed.  
+They represent the linear decision boundary fitted to the dataset.
 
 ---
 
 ## 5. Decision Boundary Visualization
 
-A decision boundary plot was generated using a mesh grid evaluated through the trained model.  
-The resulting plot was saved as:
+A contour plot was generated using model predictions across a dense mesh grid covering the feature space.  
+The generated plot:
+
+- Displays the separating boundary created by the logistic regression model  
+- Shows how the model partitions the space between the two classes  
+- Overlays the dataset points colored by their true labels  
+
+The plot is saved as:
 
 ```
 decision_boundary.png
 ```
 
-The plot shows:
-
-- The learned separating boundary in the 2D feature space  
-- The points colored by their true classes  
-
-This demonstrates how well the model distinguishes between the two classes.
+This satisfies the requirement for visualizing the learned classifier.
 
 ---
 
-## 6. How to Run
+## 6. How to Run the Project
 
-Install required packages:
+Install required libraries:
 
 ```
 pip install numpy scikit-learn matplotlib
 ```
 
-Run the program:
+Execute the source code:
 
 ```
 python logistic_regression_from_scratch.py
 ```
 
-Outputs include:
+This will:
 
-- Final learned weights and bias  
-- Accuracy, precision, and recall  
-- Saved image file: `decision_boundary.png`
+1. Generate the dataset  
+2. Train the logistic regression model  
+3. Compute accuracy, precision, and recall  
+4. Print the final weights and bias  
+5. Save `decision_boundary.png`  
 
 ---
 
-## 7. Deliverable Summary
+## 7. Deliverables Completed
 
 This submission includes:
 
 - A complete Python implementation of logistic regression from scratch  
-- Gradient-based training implementation  
-- Evaluation metrics  
-- A decision boundary visualization  
-- A text-based explanation of methodology and results  
+- Manual computations for accuracy, precision, and recall  
+- A decision boundary visualization image  
+- A detailed explanation of methodology, model components, and evaluation  
 
-All required tasks and deliverables specified in the project description are fully addressed.
+All required tasks and deliverables described in the assignment instructions have been addressed.
