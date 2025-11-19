@@ -1,94 +1,121 @@
-# K-Nearest Neighbors (KNN) Classification from Scratch
+# Logistic Regression from Scratch (NumPy Implementation)
 
-This project implements the K-Nearest Neighbors (KNN) classification algorithm from scratch using only NumPy.  
-The implementation is compared against Scikit-Learn’s KNeighborsClassifier for multiple values of K.  
-A synthetic binary classification dataset is generated using sklearn.datasets.make_classification as required.
+This project implements a logistic regression classifier using only NumPy.  
+The goal is to demonstrate a full mathematical and programmatic understanding of logistic regression, including data generation, model training, evaluation, and decision boundary visualization.
 
 ---
 
 ## 1. Dataset Description
 
-A synthetic dataset is created with the following parameters:
+A synthetic two-dimensional binary classification dataset was generated using `make_classification` with the following parameters:
 
 - 500 samples  
-- 10 numerical features  
-- 5 informative features  
-- 2 classes  
-- Train-test split: 70% training, 30% testing  
+- 2 informative numerical features  
+- No redundant features  
+- Two balanced classes  
+- Random state set for reproducibility  
 
-This satisfies the project requirement of generating a binary classification dataset.
-
----
-
-## 2. Custom KNN Implementation
-
-The custom implementation includes:
-
-- Euclidean distance calculation  
-- Retrieval of the K nearest neighbors  
-- Majority voting for classification  
-- Predictions for K = 3, 5, and 7  
-
-No external libraries are used for the KNN logic.
+The dataset allows clear separation between two classes, making it suitable for logistic regression.
 
 ---
 
-## 3. Evaluation Procedure
+## 2. Logistic Regression Implementation
 
-The following steps were performed:
+The model was implemented without using Scikit-Learn.  
+The following components were built manually:
 
-1. Train the custom KNN model on training data  
-2. Predict on test data  
-3. Compute accuracy for K = 3, 5, and 7  
-4. Repeat the same with Scikit-Learn KNeighborsClassifier  
-5. Compare accuracy values for both implementations  
+### 2.1 Sigmoid Activation  
+The logistic (sigmoid) function was implemented as  
+*s(z) = 1 / (1 + exp(-z))*.
 
----
+### 2.2 Binary Cross-Entropy Loss  
+The gradients were derived based on the logistic loss function.
 
-## 4. Results Summary
+### 2.3 Gradient Descent Optimization  
+Weights and bias were updated iteratively across a fixed number of iterations.
 
-Accuracy values are printed in the terminal as:
-
-
-Custom KNN Accuracies:
-K=3: <value>
-K=5: <value>
-K=7: <value>
-
-Sklearn KNN Accuracies:
-K=3: <value>
-K=5: <value>
-K=7: <value>
-
-
-The exact values depend on runtime but generally both implementations follow the same trend.
+### 2.4 Prediction Rule  
+Predicted labels were assigned using a decision threshold of 0.5 on the sigmoid output.
 
 ---
 
-## 5. How to Run
+## 3. Training and Model Parameters
 
-Install required libraries:
+The model was trained using:
 
+- Learning rate: 0.1  
+- Iterations: 3000  
+- Input: Training split (70% of dataset)
 
-pip install numpy scikit-learn
+The final learned parameters are printed in the program output:
 
+- Final weights  
+- Final bias  
+
+These values vary slightly depending on system environment but remain consistent in structure.
+
+---
+
+## 4. Evaluation Metrics
+
+The following performance metrics were computed on the test split:
+
+- Accuracy  
+- Precision  
+- Recall  
+
+These provide a quantitative assessment of the classifier’s performance.
+
+---
+
+## 5. Decision Boundary Visualization
+
+A decision boundary plot was generated using a mesh grid evaluated through the trained model.  
+The resulting plot was saved as:
+
+```
+decision_boundary.png
+```
+
+The plot shows:
+
+- The learned separating boundary in the 2D feature space  
+- The points colored by their true classes  
+
+This demonstrates how well the model distinguishes between the two classes.
+
+---
+
+## 6. How to Run
+
+Install required packages:
+
+```
+pip install numpy scikit-learn matplotlib
+```
 
 Run the program:
 
+```
+python logistic_regression_from_scratch.py
+```
 
-python knn_from_scratch.py
+Outputs include:
 
-
-This generates all required outputs.
+- Final learned weights and bias  
+- Accuracy, precision, and recall  
+- Saved image file: `decision_boundary.png`
 
 ---
 
-## 6. Deliverables Included
+## 7. Deliverable Summary
 
-- Python script implementing KNN from scratch  
-- Evaluation of K = 3, 5, 7  
-- Comparison with Scikit-Learn  
-- Synthetic binary dataset generation  
-- Accuracy metrics  
+This submission includes:
 
-All required tasks and deliverables are addressed.
+- A complete Python implementation of logistic regression from scratch  
+- Gradient-based training implementation  
+- Evaluation metrics  
+- A decision boundary visualization  
+- A text-based explanation of methodology and results  
+
+All required tasks and deliverables specified in the project description are fully addressed.
